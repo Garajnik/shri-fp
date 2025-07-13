@@ -1,6 +1,5 @@
 import * as R from 'ramda';
 
-// Утилиты
 const isColor = R.equals;
 const notWhite = R.complement(isColor('white'));
 const isNotRedOrWhite = R.both(R.complement(isColor('red')), R.complement(isColor('white')));
@@ -13,7 +12,6 @@ const countRed = countColor('red');
 const countBlue = countColor('blue');
 const countOrange = countColor('orange');
 
-// Уникальные цвета (кроме белого)
 const countByColor = R.countBy(R.identity);
 const countWithoutWhite = R.pipe(getColors, R.reject(R.equals('white')));
 const hasThreeSameNonWhite = R.pipe(
@@ -23,7 +21,6 @@ const hasThreeSameNonWhite = R.pipe(
   R.any(R.gte(R.__, 3))
 );
 
-// Проверка цвета конкретной фигуры
 const colorIs = R.propEq;
 const sameColor = (a, b) => R.eqProps(a, b);
 const sameNonWhiteColor = (a, b) =>
