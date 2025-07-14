@@ -21,6 +21,7 @@ const hasThreeSameNonWhite = R.pipe(
   R.any(R.gte(R.__, 3))
 );
 
+
 const colorIs = R.propEq;
 const sameColor = (a, b) => R.eqProps(a, b);
 const sameNonWhiteColor = (a, b) =>
@@ -69,4 +70,14 @@ export const validateFieldN9 = R.pipe(
   R.all(R.equals('green'))
 );
 
-export const validateFieldN10 = sameNonWhiteColor('triangle', 'square');
+
+export const validateFieldN10 = R.allPass([
+  R.both(
+    R.eqProps('triangle'),
+    R.eqProps('square')
+  ),
+  R.both(
+    R.propSatisfies(notWhite, 'triangle'),
+    R.propSatisfies(notWhite, 'square')
+  )
+])
